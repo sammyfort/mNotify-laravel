@@ -1,5 +1,5 @@
 <?php
- namespace Velstack\Mnotify\VelstackProjects\Provider;
+ namespace Velstack\Mnotify;
 
  use Velstack\Mnotify\Notifications\MnotifyChannel;
  use Illuminate\Support\Facades\Notification;
