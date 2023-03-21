@@ -4,10 +4,10 @@
 namespace Velstack\Mnotify;
 
 
-use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Campaign;
-use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Commands;
-use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Group;
-use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Contact;
+use Velstack\Mnotify\Configurations\Traits\Campaign;
+use Velstack\Mnotify\Configurations\Traits\Commands;
+use Velstack\Mnotify\Configurations\Traits\Group;
+use Velstack\Mnotify\Configurations\Traits\Contact;
 
 class SMS
 {

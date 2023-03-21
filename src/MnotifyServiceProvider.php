@@ -19,10 +19,10 @@ class MnotifyServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $this->mergeConfigFrom( __DIR__ . '../../../config/mnotify.php', 'mnotify');
+        $this->mergeConfigFrom( __DIR__ . '/config/mnotify.php', 'mnotify');
 
         $this->publishes([
-            __DIR__ . '../../../config/mnotify.php' => config_path('mnotify.php'),
+            __DIR__ . '/config/mnotify.php' => config_path('mnotify.php'),
         ], 'mnotify');
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Velstack\Mnotify\VelstackProjects\Configurations\Traits;
+namespace Velstack\Mnotify\Configurations\Traits;
 
 use Illuminate\Support\Facades\Http;
 
