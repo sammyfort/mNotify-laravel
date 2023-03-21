@@ -1,6 +1,6 @@
 <?php
 
-namespace Velstack\Mnotify;
+namespace Velstack\Mnotify\Notifications;
 
 class MnotifyMessage
 {

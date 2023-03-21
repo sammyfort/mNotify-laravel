@@ -5,7 +5,7 @@ namespace Velstack\Mnotify\Traits;
 
 
 use App\Models\User;
-use Velstack\Mnotify\MnotifyMessage;
+use Velstack\Mnotify\Notification\MnotifyMessage;
 
 trait Campaign
 {
@@ -13,7 +13,7 @@ trait Campaign
 
     public static function sendQuick(string|array $recipients, $message=null)
     {
-        $def = new MnotifyMessage();
+        $def = new MnotifyMessage;
         $url = self::bindParamsToEndPoint(self::quickSMSURL());
         $data = [
             'recipient' => $recipients,
