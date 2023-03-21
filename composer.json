@@ -1,0 +1,28 @@
+{
+    "name": "velstack/mnotify",
+    "description": "Laravel package for mNotify APIs",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Velstack\\Mnotify\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sammy fort",
+            "email": "sam@velstack.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Velstack\\Mnotify\\VelstackServiceProvider"
+            ]
+        }
+    }
+}
