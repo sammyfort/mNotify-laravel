@@ -1,12 +1,11 @@
 <?php
- namespace Velstack\Mnotify;
+ namespace Velstack\Mnotify\VelstackProjects\Provider;
 
-
- use Velstack\Mnotify\MnotifyChannel;
+ use Velstack\Mnotify\Notifications\MnotifyChannel;
  use Illuminate\Support\Facades\Notification;
  use Illuminate\Support\ServiceProvider;
 
-class VelstackServiceProvider extends ServiceProvider
+class MnotifyServiceProvider extends ServiceProvider
 {
 
     public function register()
@@ -14,7 +13,6 @@ class VelstackServiceProvider extends ServiceProvider
         Notification::extend('mnotify', function ($app) {
             return new MnotifyChannel();
         });
-
     }
 
 

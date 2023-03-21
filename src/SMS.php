@@ -4,17 +4,17 @@
 namespace Velstack\Mnotify;
 
 
-use Velstack\Mnotify\Traits\Campaign;
-use Velstack\Mnotify\Traits\Commands;
-use Velstack\Mnotify\Traits\Group;
-use Velstack\Mnotify\Traits\Contact;
+use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Campaign;
+use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Commands;
+use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Group;
+use Velstack\Mnotify\VelstackProjects\Configurations\Traits\Contact;
 
 class SMS
 {
     use Commands, Contact, Campaign, Group;
 
     private static function quickSMSURL(): string{
-        return 'https://api.mnotify.com/api/sms/quick?ke';
+        return 'https://api.mnotify.com/api/sms/quick';
     }
 
     private static function groupSMSURL(): string{

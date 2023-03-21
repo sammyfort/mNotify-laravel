@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
+use Velstack\Mnotify\SMS;
+
 class MnotifyChannel
 {
 
@@ -22,6 +24,9 @@ class MnotifyChannel
         else
         {
             $phone = $notifiable->phone;
+        }
+        if (!is_array($phone)){
+            $phone = array($phone);
         }
 
         if (is_null($phone)){

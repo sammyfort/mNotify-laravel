@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Velstack\\Mnotify\\' => array($baseDir . '/src'),
+    'VelstackProjects\\Mnotify\\' => array($baseDir . '/src'),
 );

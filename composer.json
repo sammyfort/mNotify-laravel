@@ -21,7 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Velstack\\Mnotify\\VelstackServiceProvider"
+              "MnotifyServiceProvider"
             ]
         }
     }

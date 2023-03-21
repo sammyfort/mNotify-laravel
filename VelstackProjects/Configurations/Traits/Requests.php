@@ -1,18 +1,16 @@
 <?php
 
-namespace Velstack\Mnotify\Traits;
+namespace Velstack\Mnotify\VelstackProjects\Configurations\Traits;
 
 use Illuminate\Support\Facades\Http;
 
 trait Requests
 {
 
-    private static function postRequest( string $endpoint, $data=null){
+    private static function postRequest(string $endpoint, $data=null){
 
         $response = Http::withHeaders([
-            "Content-Type" =>  "application/json",
-            "Accept: application/json",
-            "Cache-Control" => "no-cache"
+            "Content-Type" =>  "application/json", "Accept: application/json", "Cache-Control" => "no-cache"
         ])->post($endpoint, $data);
 
         $response->throw();
@@ -23,12 +21,7 @@ trait Requests
     }
 
     private static function postMediaRequest(string $endpoint, $data=null){
-        $response = Http::withHeaders([
-            "Content-Type" =>  "application/json",
-            "Accept: application/json",
-            "Cache-Control" => "no-cache"
-        ])->asMultipart()->post($endpoint, $data);
-
+        $response = Http::withHeaders(["Content-Type" =>  "application/json",])->asMultipart()->post($endpoint, $data);
         $response->throw();
         if ($response['status'] != 'success'){
             return  response()->json(json_decode($response), 400);
