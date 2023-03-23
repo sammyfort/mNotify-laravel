@@ -8,7 +8,7 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 
 trait Group
 {
-    public static function sendSMS(array $group_id, $message_id=null)
+    public static function sendGroupQuickSMS(array $group_id, $message_id=null)
     {
         $def = new MnotifyMessage();
         $data = [
@@ -23,7 +23,7 @@ trait Group
         return json_decode($response);
     }
 
-    public static function sendVoiceCall(string $campaign_message, array $group_id, $file_path,  string $voice_id)
+    public static function sendGroupVoiceCall(string $campaign_message, array $group_id, $file_path,  string $voice_id)
     {
         $data = [
             'campaign' => $campaign_message,
@@ -38,18 +38,18 @@ trait Group
     }
 
 
-    public static function getAll()
+    public static function getAllGroups()
     {
         $response = self::getRequest(self::getGroupURL()."/?key=". self::apiKey());
         return json_decode($response);
     }
 
-    public static function getSpecific(int $id){
+    public static function getASpecificGroup(int $id){
         $response = self::getRequest(self::getGroupURL(). "/$id?key=". self::apiKey());
         return json_decode($response);
     }
 
-    public static function add($group_name)
+    public static function addNewGroup($group_name)
     {
         $data = [
             'group_name' => $group_name
@@ -59,7 +59,7 @@ trait Group
         return json_decode($response);
     }
 
-    public static  function update( string $title, int $id)
+    public static  function updateGroup( string $title, int $id)
     {
         $data = [
             'title' => $title,
@@ -70,7 +70,7 @@ trait Group
         return json_decode($response);
     }
 
-    public static function delete(int $group_id)
+    public static function deleteGroup(int $group_id)
     {
         $response = self::deleteRequest(self::getGroupURL()."/$group_id?key". self::apiKey());
         return json_decode($response);

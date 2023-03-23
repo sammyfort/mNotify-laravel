@@ -11,7 +11,7 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 trait Campaign
 {
 
-    public static function sendQuick(string|array $recipients, $message=null)
+    public static function sendQuickSMS(string|array $recipients, $message=null)
     {
         $def = new MnotifyMessage;
         if (!is_array($recipients)){
@@ -28,7 +28,7 @@ trait Campaign
         return json_decode($response);
     }
 
-    public static function sendFromTemplate(string|array $recipients, $template_id)
+    public static function sendSMSFromTemplate(string|array $recipients, $template_id)
     {
         if (!is_array($recipients)){
             $recipients = array($recipients);

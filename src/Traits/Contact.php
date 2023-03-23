@@ -22,13 +22,13 @@ trait Contact
     }
 
 
-    public static function getAContact(int $id)
+    public static function getASpecificContact(int $id)
     {
         $response = self::getRequest(static::getContactURL()."/$id?key=".static::apiKey());
         return json_decode($response);
     }
 
-    public static function addAContact(int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, $dob)
+    public static function addNewContact(int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, $dob)
     {
         $data = [
             'phone' => $phone,

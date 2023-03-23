@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Velstack\Mnotify;
+namespace Velstack\Mnotify\Notifications\Mnotify;
 
 
 use Velstack\Mnotify\Traits\Campaign;
@@ -63,13 +63,11 @@ class Notify
 
     }
 
-
     private static function VoiceBalanceURL(): string
     {
         return 'https://api.mnotify.com/api/balance/voice';
 
     }
-
 
     private static function apiKey()
     {
@@ -88,7 +86,7 @@ class Notify
 
     private static function isSchedule(): bool
     {
-        return false;
+        return false ?? true;
     }
 
     private static function registerSenderIdURL(): string
