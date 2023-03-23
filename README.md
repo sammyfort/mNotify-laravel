@@ -4,7 +4,8 @@
 <a href="https://github.com/sammyfort/mNotify-laravel"><img src="https://img.shields.io/badge/%3C%2F%3E-Laravel%20-blue" alt="Build Status"></a>
 <a href="https://packagist.org/packages/velstack/mnotify"><img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/velstack/mnotify?color=41aa5e&label=Installations"></a>
 <a href="https://packagist.org/packages/velstack/mnotify"><img src="https://img.shields.io/packagist/v/velstack/pusher" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/velstack/mnotify"><img src="https://img.shields.io/github/license/sammyfort/mNotify-laravel?style=plastic"></a>
+<a href="https://packagist.org/packages/velstack/mnotify"><img src="https://img.shields.io/github/license/sammyfort/mNotify-laravel"></a>
+ 
 
 </p>
  
@@ -552,7 +553,7 @@ class UserController extends  Controller{
 ```
 
 
-### Add a Group
+### Update a Group
 
 ```php
 
