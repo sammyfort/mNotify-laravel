@@ -4,9 +4,8 @@
 namespace Velstack\Mnotify\Traits;
 
 
-trait Reports
+trait Report
 {
-    use Requests, Commands;
 
     public static function checkSMSBalance()
     {

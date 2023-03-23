@@ -4,9 +4,9 @@
 namespace Velstack\Mnotify\Traits;
 
 
-trait Contacts
+trait Contact
 {
-    use Requests, Commands;
+
 
     public static function getAllContact()
     {

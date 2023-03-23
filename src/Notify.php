@@ -6,14 +6,15 @@ namespace Velstack\Mnotify\Notifications;
 
 use Velstack\Mnotify\Traits\Campaign;
 use Velstack\Mnotify\Traits\Commands;
-use Velstack\Mnotify\Traits\Contacts;
-use Velstack\Mnotify\Traits\Groups;
-use Velstack\Mnotify\Traits\Reports;
+use Velstack\Mnotify\Traits\Contact;
+use Velstack\Mnotify\Traits\Group;
+use Velstack\Mnotify\Traits\Report;
+use Velstack\Mnotify\Traits\Request;
 
 
 class Notify
 {
-    use Commands, Contacts, Campaign, Groups, Reports;
+    use Request, Commands, Contact, Campaign, Group, Report;
 
     private static function quickSMSURL(): string
     {

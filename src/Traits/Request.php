@@ -4,7 +4,7 @@ namespace Velstack\Mnotify\Traits;
 
 use Illuminate\Support\Facades\Http;
 
-trait Requests
+trait Request
 {
 
     private static function postRequest(string $endpoint, $data)

@@ -7,11 +7,11 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 use Velstack\Mnotify\Notifications\Notify;
-use Velstack\Mnotify\Traits\Setters;
+
 
 class MnotifyChannel
 {
-    use Setters;
+
 
     public function send($notifiable, Notification $notification)
     {

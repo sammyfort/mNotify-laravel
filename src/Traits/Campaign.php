@@ -10,7 +10,6 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 
 trait Campaign
 {
-    use Requests, Commands;
 
     public static function sendQuick(string|array $recipients, $message=null)
     {

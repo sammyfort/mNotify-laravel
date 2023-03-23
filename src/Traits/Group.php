@@ -6,11 +6,8 @@ namespace Velstack\Mnotify\Traits;
 
 use Velstack\Mnotify\Notifications\MnotifyMessage;
 
-trait Groups
+trait Group
 {
-    use Requests, Commands;
-
-
     public static function sendSMS(array $group_id, $message_id=null)
     {
         $def = new MnotifyMessage();
