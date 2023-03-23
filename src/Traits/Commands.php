@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Velstack\Mnotify\Configurations\Traits;
+namespace Velstack\Mnotify\Traits;
 
 
 trait Commands

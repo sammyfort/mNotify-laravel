@@ -4,10 +4,11 @@
 namespace Velstack\Mnotify\Notifications;
 
 
-use Velstack\Mnotify\Configurations\Traits\Reports;
+use Velstack\Mnotify\Traits\Reports;
+use Velstack\Mnotify\Traits\Setters;
 
 class Report
 {
-    use Reports;
+    use Reports, Setters;
 
 }

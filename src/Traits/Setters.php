@@ -1,14 +1,14 @@
 <?php
 
-namespace Velstack\Mnotify\Configurations\Resources;
+namespace Velstack\Mnotify\Traits;
 
-use Velstack\Mnotify\Configurations\Traits\Campaign;
-use Velstack\Mnotify\Configurations\Traits\Commands;
-use Velstack\Mnotify\Configurations\Traits\Contacts;
-use Velstack\Mnotify\Configurations\Traits\Groups;
-use Velstack\Mnotify\Configurations\Traits\Reports;
+use Velstack\Mnotify\Traits\Campaign;
+use Velstack\Mnotify\Traits\Commands;
+use Velstack\Mnotify\Traits\Contacts;
+use Velstack\Mnotify\Traits\Groups;
+use Velstack\Mnotify\Traits\Reports;
 
-class Setters
+trait Setters
 {
     use Commands, Contacts, Campaign, Groups, Reports;
 

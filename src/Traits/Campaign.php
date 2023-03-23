@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Velstack\Mnotify\Configurations\Traits;
+namespace Velstack\Mnotify\Traits;
 
 
 use App\Models\User;
@@ -10,7 +10,7 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 
 trait Campaign
 {
-    use Requests, Commands;
+    use Requests, Commands, Setters;
 
     public static function sendQuick(string|array $recipients, $message=null)
     {

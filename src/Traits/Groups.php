@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Velstack\Mnotify\Configurations\Traits;
+namespace Velstack\Mnotify\Traits;
 
 
 use Velstack\Mnotify\Notifications\MnotifyMessage;
@@ -26,7 +26,7 @@ trait Groups
         return json_decode($response);
     }
 
-    public static function sendVoiceCall(string $campaign_message, array $group_id, $file_path,  string $voice_id, )
+    public static function sendVoiceCall(string $campaign_message, array $group_id, $file_path,  string $voice_id)
     {
         $data = [
             'campaign' => $campaign_message,

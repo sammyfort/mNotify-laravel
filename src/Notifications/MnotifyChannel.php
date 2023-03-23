@@ -6,10 +6,12 @@ use Exception;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
-use Velstack\Mnotify\SMS;
+use Velstack\Mnotify\Notifications\SMS;
+use Velstack\Mnotify\Traits\Setters;
 
 class MnotifyChannel
 {
+    use Setters;
 
     public function send($notifiable, Notification $notification)
     {
