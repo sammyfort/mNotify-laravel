@@ -19,12 +19,12 @@ trait Campaign
         }
         $data = [
             'recipient' => $recipients,
-            'sender' => static::senderId(),
+            'sender' => self::senderId(),
             'message' => $message ?? $def->message($message),
-            'is_schedule' => static::isSchedule(),
-            'schedule_date' => static::isSchedule() ?? null,
+            'is_schedule' => self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null,
         ];
-        $response = self::postRequest(static::bindParamsToEndPoint(static::quickSMSURL()),$data);
+        $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
         return json_decode($response);
     }
 
@@ -35,12 +35,12 @@ trait Campaign
         }
         $data = [
             'recipient' => $recipients,
-            'sender' => static::senderId(),
+            'sender' => self::senderId(),
             'message_id' => $template_id  ,
-            'is_schedule' => static::isSchedule(),
-            'schedule_date' => static::isSchedule() ?: null,
+            'is_schedule' => self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?: null,
         ];
-        $response = self::postRequest(static::bindParamsToEndPoint(static::quickSMSURL()),$data);
+        $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
         return json_decode($response);
     }
 
@@ -58,12 +58,12 @@ trait Campaign
 
         $data = [
             'recipient' => $phone,
-            'sender' => static::senderId(),
+            'sender' => self::senderId(),
             'message' => $message,
-            'is_schedule' => static::isSchedule(),
-            'schedule_date' => static::isSchedule() ?? null,
+            'is_schedule' => self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null,
         ];
-        $response = self::postRequest(static::bindParamsToEndPoint(static::quickSMSURL()),$data);
+        $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
         return json_decode($response);
     }
 
@@ -76,10 +76,10 @@ trait Campaign
             'recipient' => $recipients,
             'file' => $file,
             'voice_id' => '',
-            'is_schedule' => static::isSchedule(),
-            'schedule_date' => static::isSchedule() ?? null,
+            'is_schedule' => self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null,
         ];
-        $response = self::postMediaRequest(static::bindParamsToEndPoint(static::quickVoiceCallURL()), $data);
+        $response = self::postMediaRequest(self::bindParamsToEndPoint(self::quickVoiceCallURL()), $data);
         return json_decode($response);
     }
 
@@ -93,7 +93,7 @@ trait Campaign
             'sender_name' => $sender_name,
             'purpose' => $purpose
         ];
-        $response = self::postRequest(static::bindParamsToEndPoint(static::registerSenderIdURL()), $data);
+        $response = self::postRequest(self::bindParamsToEndPoint(self::registerSenderIdURL()), $data);
         return json_decode($response);
 
     }

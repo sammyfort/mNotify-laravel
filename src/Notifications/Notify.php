@@ -59,7 +59,7 @@ class Notify
 
     private static function SMSDeliveryReportURL(): string
     {
-        return 'https://api.mnotify.com/api/campaign/7FE4A62A-96EB-4755-BC57-000A38C8C6EF';
+        return 'https://api.mnotify.com/api/campaign';
 
     }
 

@@ -11,7 +11,7 @@ trait Request
     {
 
         $response = Http::withHeaders([
-            "Content-Type" =>  "application/json", "Accept: application/json", "Cache-Control" => "no-cache"
+            "Content-Type" =>  "application/json", "Cache-Control" => "no-cache"
         ])->post($endpoint, $data);
 
         $response->throw();
@@ -23,7 +23,7 @@ trait Request
 
     private static function postMediaRequest(string $endpoint, $data)
     {
-        $response = Http::withHeaders(["Content-Type" =>  "application/json",])->asMultipart()->post($endpoint, $data);
+        $response = Http::withHeaders(["Content-Type" =>  "multipart/form-data",])->asMultipart()->post($endpoint, $data);
         $response->throw();
         if ($response['status'] != 'success'){
             return  response()->json(json_decode($response), 400);

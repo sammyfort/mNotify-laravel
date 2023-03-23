@@ -13,13 +13,13 @@ trait Group
         $def = new MnotifyMessage();
         $data = [
             'group_id' => $group_id,
-            'sender' => static::senderId(),
+            'sender' => self::senderId(),
             'message_id' => $message_id ?? $def->message($message_id),
-            'is_schedule' => static::isSchedule(),
-            'schedule_date' => static::isSchedule() ?? null,
+            'is_schedule' => self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null,
         ];
 
-        $response = self::postRequest(static::bindParamsToEndPoint(static::groupSMSURL()),$data);
+        $response = self::postRequest(self::bindParamsToEndPoint(self::groupSMSURL()),$data);
         return json_decode($response);
     }
 
@@ -30,10 +30,10 @@ trait Group
             'group_id' => $group_id,
             'file' => $file_path,
             'voice_id' => $voice_id,
-            'is_schedule' =>static::isSchedule(),
-            'schedule_date' => static::isSchedule() ?? null
+            'is_schedule' =>self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null
         ];
-        $response = self::postMediaRequest(static::bindParamsToEndPoint(static::groupVoiceCallURL()), $data);
+        $response = self::postMediaRequest(self::bindParamsToEndPoint(self::groupVoiceCallURL()), $data);
         return json_decode($response);
     }
 

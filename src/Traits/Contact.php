@@ -16,7 +16,7 @@ trait Contact
 
     public static function getAllGroupContacts(int $groupId)
     {
-        $response = self::getRequest(static::contactGroupURL()."/$groupId?key=".static::apiKey());
+        $response = self::getRequest(self::contactGroupURL()."/$groupId?key=".self::apiKey());
         return json_decode($response);
 
     }
@@ -24,7 +24,7 @@ trait Contact
 
     public static function getASpecificContact(int $id)
     {
-        $response = self::getRequest(static::getContactURL()."/$id?key=".static::apiKey());
+        $response = self::getRequest(self::getContactURL()."/$id?key=".self::apiKey());
         return json_decode($response);
     }
 
@@ -39,7 +39,7 @@ trait Contact
             'dob' => $dob
         ];
 
-        $response = self::putRequest(static::getContactURL()."/$groupId?key=".static::apiKey(), $data);
+        $response = self::postRequest(self::getContactURL()."/$groupId?key=".self::apiKey(), $data);
         return json_decode($response);
     }
 
@@ -56,15 +56,15 @@ trait Contact
             'dob' => $dob
         ];
 
-        $response = self::putRequest(static::getContactURL()."/$id?key=".self::apiKey(),$data);
+        $response = self::putRequest(self::getContactURL()."/$id?key=".self::apiKey(),$data);
 
         return json_decode($response);
     }
 
     public static function deleteContact(int $id, int $groupId)
     {
-        $response = self::deleteRequest(static::getContactURL()."/$id/$groupId?key=".self::apiKey());
-        return json_decode($response);
+        $response = self::deleteRequest(self::getContactURL()."/$id/$groupId?key=".self::apiKey());
+         return json_decode($response);
     }
 
 
