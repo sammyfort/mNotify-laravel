@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
-use Velstack\Mnotify\Notifications\SMS;
+use Velstack\Mnotify\Notifications\Notify;
 use Velstack\Mnotify\Traits\Setters;
 
 class MnotifyChannel
@@ -37,7 +37,7 @@ class MnotifyChannel
 
 
         try {
-            $response = SMS::sendQuick([$phone], $message->content());
+            $response = Notify::sendQuick([$phone], $message->content());
             return  $response;
         }catch (Exception $exception){
             Log::info("Pusher response => $exception");

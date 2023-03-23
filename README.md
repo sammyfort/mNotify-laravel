@@ -63,7 +63,7 @@ If you're using laravel below v7.0 register the service provider in `'/config/ap
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Velstack\Mnotify\Notifications\SMS;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -73,14 +73,14 @@ class UserController extends  Controller{
   
   public function send()
   {
-    SMS::sendQuick(['233205550368'], 'First laravel msg with mNotify !');
+    Notify::sendQuick(['233205550368'], 'First laravel msg with mNotify !');
     return 'Message sent successfully';
   }
   
   // to multiple numbers 
   public function toMany()
   {
-    SMS::sendQuick(['23320*******', '23320*******'],  'API messaging is fun. hurray!');
+    Notify::sendQuick(['23320*******', '23320*******'],  'API messaging is fun. hurray!');
     return 'Message sent';
   }
   
@@ -90,7 +90,7 @@ class UserController extends  Controller{
    {
      $users =  User::pluck('phone');
      foreach ($users as $user)
-     SMS::sendQuick([$user], 'Good afternoon all users !');
+     Notify::sendQuick([$user], 'Good afternoon all users !');
      return 'Message has been to all users successfully';
    }
    
@@ -98,7 +98,7 @@ class UserController extends  Controller{
   
   public function welcomeMessage()
   {
-    $sender = new SMS();
+    $sender = new Notify();
     $sender->sendQuick(['233205550368'],   'Thank you for registering on our website !');
     
     return 'Message sent successfully';
@@ -119,8 +119,8 @@ class UserController extends  Controller{
  
  public function toAuthUser()
  {
-   SMS::notify('Your subscription is expiring in 3 days.');
-    $sender = new SMS();
+   Notify::notify('Your subscription is expiring in 3 days.');
+    $sender = new Notify();
     $sender->notify('Thank you for registering on our website !');
    return 'Message sent successfully';
  }
@@ -128,7 +128,7 @@ class UserController extends  Controller{
   
    public function toAuth()
  {
-    $sender = new SMS();
+    $sender = new Notify();
     $sender->notify('Your subscription is expiring in 3 days.');
    return 'Message sent successfully';
  }
@@ -146,7 +146,7 @@ class UserController extends  Controller{
     "message": "messages sent successfully",
     "summary": {
         "_id": "A59CCB70-662D-45EF-9976-1EFAD249793D",
-        "type": "API QUICK SMS",
+        "type": "API QUICK Notify",
         "total_sent": 2,
         "contacts": 2,
         "total_rejected": 0,
@@ -314,7 +314,7 @@ class NotificationController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\SMS;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -323,7 +323,7 @@ class UserController extends  Controller{
   
   public function voiceCall()
   {
-    SMS::sendQuickVoiceCall('First Voice Campaign', ['0249706365', '0203698970'], $path_to_audio_file);
+    Notify::sendQuickVoiceCall('First Voice Campaign', ['0249706365', '0203698970'], $path_to_audio_file);
      return 'Message sent successfully';
     // the first parameter is campaign message, recipient, path to the voice file.
    
@@ -388,7 +388,7 @@ class UserController extends  Controller{
     "message": "messages sent successfully",
     "summary": {
         "_id": "8C5D1052-9BD6-459A-96FF-5DC1516C05FD",
-        "type": "API GROUP SMS",
+        "type": "API GROUP Notify",
         "total_sent": 3,
         "contacts": 3,
         "total_rejected": 0,

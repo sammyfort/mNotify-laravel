@@ -1,6 +1,8 @@
 <?php
 
-namespace Velstack\Mnotify\Traits;
+
+namespace Velstack\Mnotify\Notifications;
+
 
 use Velstack\Mnotify\Traits\Campaign;
 use Velstack\Mnotify\Traits\Commands;
@@ -8,7 +10,8 @@ use Velstack\Mnotify\Traits\Contacts;
 use Velstack\Mnotify\Traits\Groups;
 use Velstack\Mnotify\Traits\Reports;
 
-trait Setters
+
+class Notify
 {
     use Commands, Contacts, Campaign, Groups, Reports;
 
@@ -91,6 +94,7 @@ trait Setters
     {
         return 'https://api.mnotify.com/api/senderid/register';
     }
+
 
 
 }
