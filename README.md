@@ -73,14 +73,14 @@ class UserController extends  Controller{
   
   public function send()
   {
-    Notify::sendQuick(['233205550368'], 'First laravel msg with mNotify !');
+    Notify::sendQuickSMS(['233205550368'], 'First laravel msg with mNotify !');
     return 'Message sent successfully';
   }
   
   // to multiple numbers 
   public function toMany()
   {
-    Notify::sendQuick(['23320*******', '23320*******'],  'API messaging is fun. hurray!');
+    Notify::sendQuickSMS(['23320*******', '23320*******'],  'API messaging is fun. hurray!');
     return 'Message sent';
   }
   
@@ -90,7 +90,7 @@ class UserController extends  Controller{
    {
      $users =  User::pluck('phone');
      foreach ($users as $user)
-     Notify::sendQuick([$user], 'Good afternoon all users !');
+     Notify::sendQuickSMS([$user], 'Good afternoon all users !');
      return 'Message has been to all users successfully';
    }
    
@@ -99,7 +99,7 @@ class UserController extends  Controller{
   public function welcomeMessage()
   {
     $sender = new Notify();
-    $sender->sendQuick(['233205550368'],   'Thank you for registering on our website !');
+    $sender->sendQuickSMS(['233205550368'],   'Thank you for registering on our website !');
     
     return 'Message sent successfully';
   }
@@ -362,7 +362,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Group;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -371,7 +371,7 @@ class UserController extends  Controller{
   
   public function sendGroupSMS()
   {
-    Group::sendSMS(['1', '2'], 17481);
+    Notify::sendGroupQuickSMS(['1', '2'], 17481);
      return 'Message sent successfully';
     // the first array parameters are group id, the second parameter is the message id
    
@@ -406,7 +406,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Group;
+use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
@@ -415,7 +415,7 @@ class UserController extends  Controller{
   public function groupVoiceCall()
   {
   
-    Group::sendVoiceCall('First Voice Campaign', ['1','2'],  $path_to_audio_file,'20180308134708');
+    Notify::sendGroupVoiceCall('First Voice Campaign', ['1','2'],  $path_to_audio_file,'20180308134708');
      return 'Voice call sent successfully';
      
  }
@@ -449,7 +449,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Group;
+use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
@@ -457,7 +457,7 @@ class UserController extends  Controller{
   
   public function retrieveGroups()
   {
-    Group::getAll();   
+    Notify::getAllGroups();   
   }
  
   
@@ -491,7 +491,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Group;
+use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
@@ -499,7 +499,7 @@ class UserController extends  Controller{
   
   public function getOneGroup()
   {
-    Group::getSpecific(1); 
+    Notify::getASpecificGroup(1); 
     // accepts group id  
   }
  
@@ -527,7 +527,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Group;
+use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
@@ -535,7 +535,7 @@ class UserController extends  Controller{
   
   public function addGroup()
   {
-    Group::add('Testing Group'); 
+    Notify::addNewGroup('Testing Group'); 
       
   }
  
@@ -559,7 +559,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Group;
+use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
@@ -567,7 +567,7 @@ class UserController extends  Controller{
   
   public function updateGroup()
   {
-    Group::update('New Group', 3);     
+    Notify::updateGroup('New Group', 3);     
   }
   
   //the first parameter is the New name, the second parameter is the group id
@@ -592,7 +592,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Group;
+use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
@@ -600,7 +600,7 @@ class UserController extends  Controller{
   
   public function deleteGroup()
   {
-    Group::delete(3); 
+    Notify::deleteGroup(3); 
   }
   
    //accepts group id
@@ -626,7 +626,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Contact;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -635,7 +635,7 @@ class UserController extends  Controller{
   
   public function getContacts()
   {
-    Contact::getAllContact();
+    Notify::getAllContact();
 
   }
   
@@ -677,7 +677,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Contact;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -686,7 +686,7 @@ class UserController extends  Controller{
   
   public function groupContacts()
   {
-    Contact::getAllGroupContacts(1);
+    Notify::getAllGroupContacts(1);
   }
   
   // accepts group id
@@ -721,7 +721,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Contact;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -730,7 +730,7 @@ class UserController extends  Controller{
   
   public function getOneContact()
   {
-    Contact::getAContact(1);
+    Notify::getASpecificContact(1);
   }
   
   // accepts contact id
@@ -763,7 +763,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Contact;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -772,7 +772,7 @@ class UserController extends  Controller{
   
   public function addNewContact()
   {
-    Contact::addAContact(2,'0205550368','Dr.','Samuel', 'Fort', 'sam@velstack.com','1999-07-07');
+    Notify::addNewContact(2,'0205550368','Dr.','Samuel', 'Fort', 'sam@velstack.com','1999-07-07');
 
   }
   
@@ -801,7 +801,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Contact;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -810,7 +810,7 @@ class UserController extends  Controller{
   
   public function update()
   {
-    Contact::updateContact(1, 3,'0205550368','Dr.','Sam', 'Fort', 'sam@velstack.com','2002-07-07');
+    Notify::updateContact(1, 3,'0205550368','Dr.','Sam', 'Fort', 'sam@velstack.com','2002-07-07');
 
   }
   
@@ -836,7 +836,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Contact;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -845,7 +845,7 @@ class UserController extends  Controller{
   
   public function deleteMethod()
   {
-    Contact::deleteContact(1, 3);
+    Notify::deleteContact(1, 3);
 
   }
   
@@ -872,7 +872,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Report;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -881,7 +881,7 @@ class UserController extends  Controller{
   
   public function SMSBalance()
   {
-    Report::checkSMSBalance();
+    Notify::checkSMSBalance();
 
   }
   
@@ -904,7 +904,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Report;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -913,7 +913,7 @@ class UserController extends  Controller{
   
   public function voiceBalance()
   {
-    Report::checkVoiceBalance();
+    Notify::checkVoiceBalance();
 
   }
   
@@ -935,7 +935,7 @@ class UserController extends  Controller{
 ```php
 
 use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Report;
+use Velstack\Mnotify\Notifications\Notify;
  
 
 class UserController extends  Controller{
@@ -944,7 +944,7 @@ class UserController extends  Controller{
   
   public function deliveryStatus()
   {
-    Report::checkSMSDelivery();
+    Notify::checkSMSDelivery();
 
   }
   

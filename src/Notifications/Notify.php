@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Velstack\Mnotify\Notifications\Mnotify;
+namespace Velstack\Mnotify\Notifications;
 
 
 use Velstack\Mnotify\Traits\Campaign;

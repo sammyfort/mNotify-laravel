@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
-use Velstack\Mnotify\Notify;
+use Velstack\Mnotify\Notifications\Notify;
 
 
 class MnotifyChannel
