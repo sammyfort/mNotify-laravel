@@ -10,9 +10,7 @@ trait Request
     private static function postRequest(string $endpoint, $data)
     {
 
-        $response = Http::withHeaders([
-            "Content-Type" =>  "application/json", "Cache-Control" => "no-cache"
-        ])->post($endpoint, $data);
+        $response = Http::withHeaders(["Content-Type" =>  "application/json"])->post($endpoint, $data);
 
         $response->throw();
         if ($response['status'] != 'success'){

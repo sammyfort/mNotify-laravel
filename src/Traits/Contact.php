@@ -28,7 +28,7 @@ trait Contact
         return json_decode($response);
     }
 
-    public static function addNewContact(int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, $dob)
+    public static function addNewContact(int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, string $dob)
     {
         $data = [
             'phone' => $phone,
@@ -39,7 +39,7 @@ trait Contact
             'dob' => $dob
         ];
 
-        $response = self::postRequest(self::getContactURL()."/$groupId?key=".self::apiKey(), $data);
+        $response = self::postRequest( "https://api.mnotify.com/api/contact/$groupId?key=".self::apiKey(), $data);
         return json_decode($response);
     }
 
@@ -66,7 +66,5 @@ trait Contact
         $response = self::deleteRequest(self::getContactURL()."/$id/$groupId?key=".self::apiKey());
          return json_decode($response);
     }
-
-
 
 }

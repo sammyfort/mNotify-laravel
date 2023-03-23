@@ -19,9 +19,9 @@ trait Report
         return json_decode($response);
     }
 
-    public static function checkSMSDelivery(int $_id)
+    public static function checkSMSDelivery(int $sms_id)
     {
-        $response = self::getRequest(self::bindParamsToEndPoint(self::SMSDeliveryReportURL()."/$_id"));
+        $response = self::getRequest(self::bindParamsToEndPoint(self::SMSDeliveryReportURL()."/$sms_id"));
         return json_decode($response);
     }
 

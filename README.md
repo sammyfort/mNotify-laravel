@@ -48,8 +48,8 @@ return  [
 If you're using laravel below v7.0 register the service provider in `'/config/app.php'` providers array
 
 ```php
-'providers' => [
-
+'providers' => 
+[
    Velstack\Mnotify\MnotifyServiceProvider::class,
 ];
 
@@ -120,9 +120,7 @@ class UserController extends  Controller{
  public function toAuthUser()
  {
    Notify::notify('Your subscription is expiring in 3 days.');
-    $sender = new Notify();
-    $sender->notify('Thank you for registering on our website !');
-   return 'Message sent successfully';
+       return 'Message sent successfully';
  }
   
   
@@ -130,7 +128,7 @@ class UserController extends  Controller{
  {
     $sender = new Notify();
     $sender->notify('Your subscription is expiring in 3 days.');
-   return 'Message sent successfully';
+     return 'Message sent successfully';
  }
   
   
@@ -944,7 +942,7 @@ class UserController extends  Controller{
   
   public function deliveryStatus()
   {
-    Notify::checkSMSDelivery();
+    Notify::checkSMSDelivery(6071);
 
   }
   
