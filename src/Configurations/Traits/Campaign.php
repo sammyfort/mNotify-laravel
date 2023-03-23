@@ -29,7 +29,24 @@ trait Campaign
         return json_decode($response);
     }
 
-    public static function notify(string $message){
+    public static function sendFromTemplate(string|array $recipients, $template_id)
+    {
+        if (!is_array($recipients)){
+            $recipients = array($recipients);
+        }
+        $data = [
+            'recipient' => $recipients,
+            'sender' => static::senderId(),
+            'message_id' => $template_id  ,
+            'is_schedule' => static::isSchedule(),
+            'schedule_date' => static::isSchedule() ?: null,
+        ];
+        $response = self::postRequest(static::bindParamsToEndPoint(static::quickSMSURL()),$data);
+        return json_decode($response);
+    }
+
+    public static function notify(string $message)
+    {
         $object = User::findOrFail(auth()->id());
         if (method_exists($object, 'setMnotifyColumnForSMS')) {
             $phone = $object->setMnotifyColumnForSMS($object);
@@ -51,21 +68,9 @@ trait Campaign
         return json_decode($response);
     }
 
-    public static function sendGroupSMS(array $group_id, $message_id=null)
-    {
-        $def = new MnotifyMessage();
-        $data = [
-            'group_id' => $group_id,
-            'sender' => static::senderId(),
-            'message_id' => $message_id ?? $def->message($message_id),
-            'is_schedule' => static::isSchedule(),
-            'schedule_date' => static::isSchedule() ?? null,
-        ];
-        $response = self::postRequest(static::bindParamsToEndPoint(static::groupSMSURL()),$data);
-        return json_decode($response);
-    }
 
-    public static function sendVoiceCall(string $campaign_message, array|string $recipients, $file)
+
+    public static function sendQuickVoiceCall(string $campaign_message, array|string $recipients, $file)
     {
         $data = [
             'campaign' => $campaign_message,
@@ -77,6 +82,21 @@ trait Campaign
         ];
         $response = self::postMediaRequest(static::bindParamsToEndPoint(static::quickVoiceCallURL()), $data);
         return json_decode($response);
+    }
+
+
+
+
+
+    public static function registerSenderId(string $sender_name, string $purpose)
+    {
+        $data = [
+            'sender_name' => $sender_name,
+            'purpose' => $purpose
+        ];
+        $response = self::postRequest(static::bindParamsToEndPoint(static::registerSenderIdURL()), $data);
+        return json_decode($response);
+
     }
 
 
