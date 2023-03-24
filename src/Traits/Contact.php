@@ -8,13 +8,14 @@ trait Contact
 {
 
 
-    public static function getAllContact()
+
+    protected static function getAll()
     {
         $response = self::getRequest(self::bindParamsToEndPoint(self::getContactURL()));
         return json_decode($response);
     }
 
-    public static function getAllGroupContacts(int $groupId)
+    protected static function groupContact(int $groupId)
     {
         $response = self::getRequest(self::contactGroupURL()."/$groupId?key=".self::apiKey());
         return json_decode($response);
@@ -22,13 +23,13 @@ trait Contact
     }
 
 
-    public static function getASpecificContact(int $id)
+    protected static function specificContact(int $id)
     {
         $response = self::getRequest(self::getContactURL()."/$id?key=".self::apiKey());
         return json_decode($response);
     }
 
-    public static function addNewContact(int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, string $dob)
+    protected static function newContact(int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, string $dob)
     {
         $data = [
             'phone' => $phone,
@@ -39,11 +40,11 @@ trait Contact
             'dob' => $dob
         ];
 
-        $response = self::postRequest( "https://api.mnotify.com/api/contact/$groupId?key=".self::apiKey(), $data);
-        return json_decode($response);
+        $response = self::postRequest( self::getContactURL()."/$groupId?key=".self::apiKey(), $data);
+        return  $response;
     }
 
-    public static function updateContact(int $id, int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, $dob)
+    protected static function modify(int $id, int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, $dob)
     {
         $data = [
             'id' => $id,
@@ -61,10 +62,11 @@ trait Contact
         return json_decode($response);
     }
 
-    public static function deleteContact(int $id, int $groupId)
+    protected static function del(int $id, int $groupId)
     {
         $response = self::deleteRequest(self::getContactURL()."/$id/$groupId?key=".self::apiKey());
-         return json_decode($response);
+        return json_decode($response);
     }
+
 
 }

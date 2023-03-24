@@ -29,17 +29,20 @@ class MnotifyChannel
         }
 
 
-        if (is_null($phone)){
+        if (is_null($phone))
+        {
             return  response()->json('Destination phone is empty', 400);
         }
 
         $message = $notification->toMnotify($notifiable);
 
 
-        try {
+        try
+        {
             $response = Notify::sendQuickSMS([$phone], $message->content());
             return  $response;
-        }catch (Exception $exception){
+        }catch (Exception $exception)
+        {
             Log::info("Pusher response => $exception");
             throw $exception;
         }

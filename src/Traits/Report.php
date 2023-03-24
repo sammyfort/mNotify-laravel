@@ -7,19 +7,19 @@ namespace Velstack\Mnotify\Traits;
 trait Report
 {
 
-    public static function checkSMSBalance()
+    protected static function smsBal()
     {
         $response = self::getRequest(self::bindParamsToEndPoint(self::SMSBalanceURL()));
         return json_decode($response);
     }
 
-    public static function checkVoiceBalance()
+    protected static function voiceBal()
     {
         $response = self::getRequest(self::bindParamsToEndPoint(self::VoiceBalanceURL()));
-        return json_decode($response);
+        return  $response;
     }
 
-    public static function checkSMSDelivery(int $sms_id)
+    protected static function smsDelivery(int $sms_id)
     {
         $response = self::getRequest(self::bindParamsToEndPoint(self::SMSDeliveryReportURL()."/$sms_id"));
         return json_decode($response);

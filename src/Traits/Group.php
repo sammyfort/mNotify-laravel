@@ -8,7 +8,7 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 
 trait Group
 {
-    public static function sendGroupQuickSMS(array $group_id, $message_id=null)
+    protected static function sms(array $group_id, $message_id=null)
     {
         $def = new MnotifyMessage();
         $data = [
@@ -20,10 +20,10 @@ trait Group
         ];
 
         $response = self::postRequest(self::bindParamsToEndPoint(self::groupSMSURL()),$data);
-        return json_decode($response);
+        return  $response;
     }
 
-    public static function sendGroupVoiceCall(string $campaign_message, array $group_id, $file_path,  string $voice_id)
+    protected static function call(string $campaign_message, array $group_id, $file_path,  string $voice_id)
     {
         $data = [
             'campaign' => $campaign_message,
@@ -34,22 +34,22 @@ trait Group
             'schedule_date' => self::isSchedule() ?? null
         ];
         $response = self::postMediaRequest(self::bindParamsToEndPoint(self::groupVoiceCallURL()), $data);
-        return json_decode($response);
+        return  $response;
     }
 
 
-    public static function getAllGroups()
+    protected static function get()
     {
         $response = self::getRequest(self::getGroupURL()."/?key=". self::apiKey());
         return json_decode($response);
     }
 
-    public static function getASpecificGroup(int $id){
+    protected static function specific(int $id){
         $response = self::getRequest(self::getGroupURL(). "/$id?key=". self::apiKey());
         return json_decode($response);
     }
 
-    public static function addNewGroup($group_name)
+    protected static function add($group_name)
     {
         $data = [
             'group_name' => $group_name
@@ -59,22 +59,23 @@ trait Group
         return json_decode($response);
     }
 
-    public static  function updateGroup( string $title, int $id)
+    protected static  function update(string $title, int $id)
     {
         $data = [
             'title' => $title,
             'id' => $id
         ];
 
-        $response = self::putRequest(self::getGroupURL()."/$id?key". self::apiKey(), $data);
-        return json_decode($response);
+        $response = self::putRequest(self::getGroupURL()."/$id?key=".self::apiKey() , $data);
+        return   ($response);
     }
 
-    public static function deleteGroup(int $group_id)
+    protected static function delete(int $group_id)
     {
-        $response = self::deleteRequest(self::getGroupURL()."/$group_id?key". self::apiKey());
-        return json_decode($response);
+        $response = self::deleteRequest(self::getGroupURL()."/$group_id?key=". self::apiKey());
+        return  json_decode($response);
     }
+
 
 
 }

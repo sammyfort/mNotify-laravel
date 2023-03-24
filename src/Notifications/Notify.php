@@ -14,7 +14,40 @@ use Velstack\Mnotify\Traits\Request;
 
 class Notify
 {
-    use Request, Commands, Contact, Campaign, Group, Report;
+    use Request, Commands;
+    use   Campaign {
+        individuals as public sendQuickSMS;
+        fromTemplate as public sendSMSFromTemplate;
+        toAuth as public notify;
+        quickVoice as public sendQuickVoiceCall;
+        newId as public registerSenderId;
+    }
+    use Group {
+        sms  as public sendGroupQuickSMS;
+        call as public sendGroupVoiceCall;
+        get as public getAllGroups;
+        specific as public getASpecificGroup;
+        add as public addNewGroup;
+        update as public updateGroup;
+        delete as public deleteGroup;
+    }
+
+    use Contact {
+        getAll as public getAllContact;
+        groupContact as public getAllGroupContacts;
+        specificContact as public getASpecificContact;
+        newContact as public addNewContact;
+        modify as public updateContact;
+        del as public deleteContact;
+    }
+
+    use Report {
+        smsBal as public checkSMSBalance;
+        voiceBal as public checkVoiceBalance;
+        smsDelivery as public checkSMSDelivery;
+    }
+
+
 
     private static function quickSMSURL(): string
     {
@@ -69,7 +102,7 @@ class Notify
 
     }
 
-    private static function apiKey()
+    protected static function apiKey()
     {
         return config('mnotify.API_KEY');
     }

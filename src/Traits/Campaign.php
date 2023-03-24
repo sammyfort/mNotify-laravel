@@ -10,8 +10,7 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 
 trait Campaign
 {
-
-    public static function sendQuickSMS(string|array $recipients, $message=null)
+    protected  static function individuals(string|array $recipients, $message=null)
     {
         $def = new MnotifyMessage;
         if (!is_array($recipients)){
@@ -28,7 +27,7 @@ trait Campaign
         return json_decode($response);
     }
 
-    public static function sendSMSFromTemplate(string|array $recipients, $template_id)
+    protected static function fromTemplate(string|array $recipients, $template_id)
     {
         if (!is_array($recipients)){
             $recipients = array($recipients);
@@ -36,15 +35,15 @@ trait Campaign
         $data = [
             'recipient' => $recipients,
             'sender' => self::senderId(),
-            'message_id' => $template_id  ,
+            'message_id' => $template_id,
             'is_schedule' => self::isSchedule(),
             'schedule_date' => self::isSchedule() ?: null,
         ];
         $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
-        return json_decode($response);
+        return  ($response);
     }
 
-    public static function notify(string $message)
+    protected static function toAuth(string $message)
     {
         $object = User::findOrFail(auth()->id());
         if (method_exists($object, 'setMnotifyColumnForSMS')) {
@@ -64,12 +63,12 @@ trait Campaign
             'schedule_date' => self::isSchedule() ?? null,
         ];
         $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
-        return json_decode($response);
+        return  ($response);
     }
 
 
 
-    public static function sendQuickVoiceCall(string $campaign_message, array|string $recipients, $file)
+    protected static function quickVoice(string $campaign_message, array|string $recipients, $file)
     {
         $data = [
             'campaign' => $campaign_message,
@@ -80,14 +79,13 @@ trait Campaign
             'schedule_date' => self::isSchedule() ?? null,
         ];
         $response = self::postMediaRequest(self::bindParamsToEndPoint(self::quickVoiceCallURL()), $data);
-        return json_decode($response);
+        return  ($response);
     }
 
 
 
 
-
-    public static function registerSenderId(string $sender_name, string $purpose)
+    protected static function newId(string $sender_name, string $purpose)
     {
         $data = [
             'sender_name' => $sender_name,

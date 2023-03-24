@@ -21,7 +21,7 @@ trait Request
 
     private static function postMediaRequest(string $endpoint, $data)
     {
-        $response = Http::withHeaders(["Content-Type" =>  "multipart/form-data",])->asMultipart()->post($endpoint, $data);
+        $response = Http::withHeaders(["Content-Type" =>  "multipart/form-data",])->post($endpoint, $data);
         $response->throw();
         if ($response['status'] != 'success'){
             return  response()->json(json_decode($response), 400);
