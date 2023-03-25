@@ -88,9 +88,8 @@ class UserController extends  Controller{
   
    public function fromDatabase()
    {
-     $users =  User::pluck('phone');
-     foreach ($users as $user)
-     Notify::sendQuickSMS([$user], 'Good afternoon all users !');
+     $users = User::pluck('phone')->toArray();  
+     Notify::sendQuickSMS($users, 'Good afternoon all users !');
      return 'Message has been to all users successfully';
    }
    
