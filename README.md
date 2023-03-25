@@ -105,10 +105,10 @@ class UserController extends  Controller{
   
   
   
-  /** you can also call the 'notify'. 
+  /** you can also call the 'notify method'. 
  * This approach will send the message to the authenticated user in your application.
  * So you don't need to pass a recipient. This must only be called on App\Models\User model.
- * NOTE: your Table must contain a 'phone' column. If doesn't, you may set a 'setMnotifyColumnForSMS()'
+ * NOTE: your model table must contain a 'phone' column. If doesn't, you may set a 'setMnotifyColumnForSMS()'
  * method in your User::class model to return the custom column where you store phone numbers. eg.@after 
  * 
  * public function setMnotifyColumnForSMS(){
