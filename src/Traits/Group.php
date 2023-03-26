@@ -8,43 +8,16 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 
 trait Group
 {
-    protected static function sms(array $group_id, $message_id=null)
-    {
-        $def = new MnotifyMessage();
-        $data = [
-            'group_id' => $group_id,
-            'sender' => self::senderId(),
-            'message_id' => $message_id ?? $def->message($message_id),
-            'is_schedule' => self::isSchedule(),
-            'schedule_date' => self::isSchedule() ?? null,
-        ];
-
-        $response = self::postRequest(self::bindParamsToEndPoint(self::groupSMSURL()),$data);
-        return  $response;
-    }
-
-    protected static function call(string $campaign_message, array $group_id, $file_path,  string $voice_id)
-    {
-        $data = [
-            'campaign' => $campaign_message,
-            'group_id' => $group_id,
-            'file' => $file_path,
-            'voice_id' => $voice_id,
-            'is_schedule' =>self::isSchedule(),
-            'schedule_date' => self::isSchedule() ?? null
-        ];
-        $response = self::postMediaRequest(self::bindParamsToEndPoint(self::groupVoiceCallURL()), $data);
-        return  $response;
-    }
 
 
-    protected static function get()
+
+    protected static function groups()
     {
         $response = self::getRequest(self::getGroupURL()."/?key=". self::apiKey());
         return json_decode($response);
     }
 
-    protected static function specific(int $id){
+    protected static function singleGroup(int $id){
         $response = self::getRequest(self::getGroupURL(). "/$id?key=". self::apiKey());
         return json_decode($response);
     }

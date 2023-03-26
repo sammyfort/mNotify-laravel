@@ -10,7 +10,7 @@ use Velstack\Mnotify\Notifications\MnotifyMessage;
 
 trait Campaign
 {
-    protected  static function individuals(string|array $recipients, $message=null)
+    protected  static function quickSMS(string|array $recipients, $message=null)
     {
         $def = new MnotifyMessage;
         if (!is_array($recipients)){
@@ -35,7 +35,7 @@ trait Campaign
         $data = [
             'recipient' => $recipients,
             'sender' => self::senderId(),
-            'message_id' => $template_id,
+            'message' => $template_id,
             'is_schedule' => self::isSchedule(),
             'schedule_date' => self::isSchedule() ?: null,
         ];
@@ -82,6 +82,34 @@ trait Campaign
         return  ($response);
     }
 
+    protected static function groupSMS(array $group_id, $message_id=null)
+    {
+        $def = new MnotifyMessage();
+        $data = [
+            'group_id' => $group_id,
+            'sender' => self::senderId(),
+            'message_id' => $message_id ?? $def->message($message_id),
+            'is_schedule' => self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null,
+        ];
+
+        $response = self::postRequest(self::bindParamsToEndPoint(self::groupSMSURL()),$data);
+        return  $response;
+    }
+
+    protected static function groupCall(string $campaign_message, array $group_id, $file_path,  string $voice_id)
+    {
+        $data = [
+            'campaign' => $campaign_message,
+            'group_id' => $group_id,
+            'file' => $file_path,
+            'voice_id' => $voice_id,
+            'is_schedule' =>self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null
+        ];
+        $response = self::postMediaRequest(self::bindParamsToEndPoint(self::groupVoiceCallURL()), $data);
+        return  $response;
+    }
 
 
 

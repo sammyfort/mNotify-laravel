@@ -8,7 +8,6 @@ trait Contact
 {
 
 
-
     protected static function getAll()
     {
         $response = self::getRequest(self::bindParamsToEndPoint(self::getContactURL()));

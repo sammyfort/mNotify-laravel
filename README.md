@@ -212,7 +212,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Illuminate\Support\Facades\Notification;
- 
+
 
 class NotificationController extends  Controller{
 

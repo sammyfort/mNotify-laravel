@@ -10,23 +10,34 @@ use Velstack\Mnotify\Traits\Contact;
 use Velstack\Mnotify\Traits\Group;
 use Velstack\Mnotify\Traits\Report;
 use Velstack\Mnotify\Traits\Request;
+use Velstack\Mnotify\Traits\Template;
 
 
 class Notify
 {
     use Request, Commands;
     use   Campaign {
-        individuals as public sendQuickSMS;
+        quickSMS as public sendQuickSMS;
         fromTemplate as public sendSMSFromTemplate;
         toAuth as public notify;
         quickVoice as public sendQuickVoiceCall;
+        groupSMS  as public sendGroupQuickSMS;
+        groupCall as public sendGroupVoiceCall;
         newId as public registerSenderId;
     }
+
+    use   Template {
+        messageTemplates as public getAllMessageTemplates;
+        singleTemplate as public getSingleMessageTemplate;
+        addMgsTemplate as public addNewMessageTemplate;
+        putMsgTemplate as public updateMessageTemplate;
+        deleteMsgTemplate  as public deleteMessageTemplate;
+    }
+
     use Group {
-        sms  as public sendGroupQuickSMS;
-        call as public sendGroupVoiceCall;
-        get as public getAllGroups;
-        specific as public getASpecificGroup;
+
+        groups as public getAllGroups;
+        singleGroup as public getASpecificGroup;
         add as public addNewGroup;
         update as public updateGroup;
         delete as public deleteGroup;
