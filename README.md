@@ -475,7 +475,7 @@ class UserController extends  Controller{
 }
 
 ```
-#Message Template
+# Message Template
 #### Get all Message Template
 
 ```php
