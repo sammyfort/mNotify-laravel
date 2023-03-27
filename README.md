@@ -57,7 +57,7 @@ If you're using laravel below v7.0 register the service provider in `'/config/ap
  
 ```
 # Campaign
-### Send quick bulk SMS
+#### Send quick bulk SMS
 
 ```php
 
