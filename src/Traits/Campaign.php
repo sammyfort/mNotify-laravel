@@ -27,21 +27,6 @@ trait Campaign
         return json_decode($response);
     }
 
-    protected static function fromTemplate(string|array $recipients, $template_id)
-    {
-        if (!is_array($recipients)){
-            $recipients = array($recipients);
-        }
-        $data = [
-            'recipient' => $recipients,
-            'sender' => self::senderId(),
-            'message' => $template_id,
-            'is_schedule' => self::isSchedule(),
-            'schedule_date' => self::isSchedule() ?: null,
-        ];
-        $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
-        return  ($response);
-    }
 
     protected static function toAuth(string $message)
     {
@@ -68,7 +53,7 @@ trait Campaign
 
 
 
-    protected static function quickVoice(string $campaign_message, array|string $recipients, $file)
+    protected static function quickVoice(string $campaign_message, array $recipients, $file)
     {
         $data = [
             'campaign' => $campaign_message,
@@ -82,13 +67,12 @@ trait Campaign
         return  ($response);
     }
 
-    protected static function groupSMS(array $group_id, $message_id=null)
+    protected static function groupSMS(array|string $group_id, int $message_id)
     {
-        $def = new MnotifyMessage();
         $data = [
             'group_id' => $group_id,
             'sender' => self::senderId(),
-            'message_id' => $message_id ?? $def->message($message_id),
+            'message_id' => $message_id ,
             'is_schedule' => self::isSchedule(),
             'schedule_date' => self::isSchedule() ?? null,
         ];

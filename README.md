@@ -56,8 +56,8 @@ If you're using laravel below v7.0 register the service provider in `'/config/ap
  
  
 ```
-
-## Send a quick SMS
+# Campaign
+### Send quick bulk SMS
 
 ```php
 
@@ -68,20 +68,20 @@ use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
-  // sending a quick sms
+  
   // recipients number be in array
   
   public function send()
   {
     Notify::sendQuickSMS(['233205550368'], 'First laravel msg with mNotify !');
-    return 'Message sent successfully';
+    return 'success';
   }
   
   // to multiple numbers 
   public function toMany()
   {
     Notify::sendQuickSMS(['23320*******', '23320*******'],  'API messaging is fun. hurray!');
-    return 'Message sent';
+    return 'success';
   }
   
     // OR
@@ -90,7 +90,7 @@ class UserController extends  Controller{
    {
      $users = User::pluck('phone')->toArray();  
      Notify::sendQuickSMS($users, 'Good afternoon all users !');
-     return 'Message has been to all users successfully';
+     return 'success';
    }
    
      // you can also call it like this
@@ -100,13 +100,13 @@ class UserController extends  Controller{
     $sender = new Notify();
     $sender->sendQuickSMS(['233205550368'],   'Thank you for registering on our website !');
     
-    return 'Message sent successfully';
+     return 'success';
   }
   
   
   
   /** you can also call the 'notify method'. 
- * This approach will send the message to the authenticated user in your application.
+ * This method will send the sms to the authenticated user in your application.
  * So you don't need to pass a recipient. This must only be called on App\Models\User model.
  * NOTE: your model table must contain a 'phone' column. If doesn't, you may set a 'setMnotifyColumnForSMS()'
  * method in your User::class model to return the custom column where you store phone numbers. eg.@after 
@@ -119,7 +119,7 @@ class UserController extends  Controller{
  public function toAuthUser()
  {
    Notify::notify('Your subscription is expiring in 3 days.');
-       return 'Message sent successfully';
+       return 'success';
  }
   
   
@@ -127,7 +127,7 @@ class UserController extends  Controller{
  {
     $sender = new Notify();
     $sender->notify('Your subscription is expiring in 3 days.');
-     return 'Message sent successfully';
+     return 'success';
  }
   
   
@@ -135,7 +135,7 @@ class UserController extends  Controller{
 }
  
 ```
-#### output
+#### `Response`
 ```json
  {
     "status": "success",
@@ -156,7 +156,7 @@ class UserController extends  Controller{
 ```
 
 
-## Using the notification channel
+### Using the notification channel
 
 #### In the notification class;
 
@@ -236,7 +236,7 @@ class NotificationController extends  Controller{
 
 #### In your model:
 
-Make sure your target model uses the `Notifiable` Trait
+Make sure your target model implements the `Notifiable` Trait
 
 ```php
 
@@ -286,9 +286,7 @@ use Illuminate\Support\Facades\Notification;
 
 class NotificationController extends  Controller{
 
-  // sending notification
-  
-  
+ 
 //  Sometimes you may need to send a notification to someone who 
 //  is not stored as a "user" of your application. Using the 
 //  Notification facade's route method, you may specify 'mnotify' 
@@ -298,7 +296,7 @@ class NotificationController extends  Controller{
   public function onDemandNotification()
   { 
     Notification::route('mnotify', '020***0368')->notify(new WelcomeNotification());
-     return 'Message sent successfully';
+      return 'success';
   }
   
 }
@@ -306,55 +304,7 @@ class NotificationController extends  Controller{
 ```
 
 
-## Send Quick Voice Call
-
-```php
-
-use App\Http\Controllers\Controller;
-use Velstack\Mnotify\Notifications\Notify;
- 
-
-class UserController extends  Controller{
-
- 
-  
-  public function voiceCall()
-  {
-    Notify::sendQuickVoiceCall('First Voice Campaign', ['0249706365', '0203698970'], $path_to_audio_file);
-     return 'Message sent successfully';
-    // the first parameter is campaign message, recipient, path to the voice file.
-   
-  }
-  
-}
- 
-```
-
-#### Response
-```json
-{
-    "status": "success",
-    "code": "2000",
-    "message": "voice call sent successfully",
-    "summary": {
-        "_id": "XRSzcFO74eHGCj6TrdZjVut8qDsXVi",
-        "voice_id": "20180308134708",
-        "type": "QUICK BULK CALL",
-        "total_sent": 2,
-        "contacts": 2,
-        "total_rejected": 0,
-        "numbers_sent": [],
-        "credit_used": 18
-    }
-}
-
-```
-
-
-
-# Group Messaging
-
-### Send Quick Group SMS
+#### Group Bulk SMS
 
 ```php
 
@@ -369,7 +319,7 @@ class UserController extends  Controller{
   public function sendGroupSMS()
   {
     Notify::sendGroupQuickSMS(['1', '2'], 17481);
-     return 'Message sent successfully';
+      return 'success';
     // the first array parameters are group id, the second parameter is the message id
    
   }
@@ -398,7 +348,52 @@ class UserController extends  Controller{
 
 ```
 
-### Send Group Voice Call
+
+#### Quick Bulk Voice Call
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+ 
+
+class UserController extends  Controller{
+
+ 
+  
+  public function voiceCall()
+  {
+    Notify::sendQuickVoiceCall('First Voice Campaign', ['0249706365', '0203698970'], $path_to_audio_file);
+     return 'success';
+    // the first parameter is campaign message, recipient, path to the voice file.
+   
+  }
+  
+}
+ 
+```
+
+#### Response
+```json
+{
+    "status": "success",
+    "code": "2000",
+    "message": "voice call sent successfully",
+    "summary": {
+        "_id": "XRSzcFO74eHGCj6TrdZjVut8qDsXVi",
+        "voice_id": "20180308134708",
+        "type": "QUICK BULK CALL",
+        "total_sent": 2,
+        "contacts": 2,
+        "total_rejected": 0,
+        "numbers_sent": [],
+        "credit_used": 18
+    }
+}
+
+```
+
+#### Group Bulk Voice Call
 
 ```php
 
@@ -413,7 +408,8 @@ class UserController extends  Controller{
   {
   
     Notify::sendGroupVoiceCall('First Voice Campaign', ['1','2'],  $path_to_audio_file,'20180308134708');
-     return 'Voice call sent successfully';
+      return 'success';
+      //accepts campaign message, group id, path to audio file, or voice id
      
  }
   
@@ -441,7 +437,213 @@ class UserController extends  Controller{
 
 ```
 
-### Get all Groups 
+#### Sender ID Registration
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+
+class UserController extends  Controller{
+
+ 
+  
+  public function senderId()
+  {
+  
+    Notify::registerSenderId('mNotify', 'For Sending SMS Newsletters');
+     return 'success';
+      // accepts   sender id, purpose 
+     
+ }
+  
+}
+ 
+```
+
+#### `Response`
+```json
+{
+    "status": "success",
+    "code": "2000",
+    "message": "Sender ID Successfully Registered.",
+    "summary": {
+        "sender_name": "mNotify",
+        "purpose": "For Sending SMS Newsletters",
+        "status": "Pending"
+    }
+}
+
+```
+#Message Template
+#### Get all Message Template
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+
+class UserController extends  Controller{
+
+ 
+  
+  public function allMsgTemplate()
+  {
+    Notify::getAllMessageTemplates();   
+  }
+ 
+  
+}
+ 
+```
+
+#### `Response`
+```json
+{
+    "status": "success",
+    "template_list": [
+        {
+            "_id": 1,
+            "title": "Testing Message",
+            "content": "Just trying to test the message"
+        },
+        {
+            "_id": 2,
+            "title": "HAPPY BIRTHDAY",
+            "content": "This day we would like to wish you a happy birthday."
+        }
+    ]
+}
+```
+
+#### Get a Specific Message Template
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+
+class UserController extends  Controller{
+
+ 
+  
+  public function allMsgTemplate()
+  {
+    Notify::getASpecificMessageTemplate(1);  
+     // accepts template id 
+  }
+ 
+  
+}
+ 
+```
+
+#### `Response`
+```json
+{
+    "status": "success",
+    "template_list": {
+        "_id": 1,
+        "title": "Testing Message",
+        "content": "Just trying to test the message"
+    }
+}
+```
+
+#### Add Message Template
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+
+class UserController extends  Controller{
+
+ 
+  
+  public function addTemplate()
+  {
+    Notify::addNewMessageTemplate('API testing','Best message template'); 
+     // accepts title and content  
+  }
+ 
+  
+}
+ 
+```
+
+#### `Response`
+```json
+{
+    "status": "success",
+    "_id": "3"
+}
+```
+
+
+#### Update a Message Template
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+
+class UserController extends  Controller{
+
+ 
+  
+  public function addTemplate()
+  {
+    Notify::updateMessageTemplate(3,'API testing','Best message template');  
+    // accepts template id, title and content
+  }
+ 
+  
+}
+ 
+```
+
+#### `Response`
+```json
+{
+    "status": "success",
+    "message": "template updated"
+}
+```
+
+#### Delete Message Template
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+
+class UserController extends  Controller{
+
+ 
+  
+  public function addTemplate()
+  {
+    Notify::deleteMessageTemplate(3);  
+    // accepts delete template id 
+  }
+ 
+  
+}
+ 
+```
+
+#### `Response`
+```json
+{
+    "status": "success",
+    "message": "template deleted"
+}
+```
+
+
+#Group
+#### Get all Groups 
 
 ```php
 
@@ -483,7 +685,7 @@ class UserController extends  Controller{
 ```
 
 
-### Get a specific Groups
+#### Get a specific Groups
 
 ```php
 
@@ -519,7 +721,7 @@ class UserController extends  Controller{
 ```
 
 
-### Add a Group
+#### Add a Group
 
 ```php
 
@@ -533,6 +735,7 @@ class UserController extends  Controller{
   public function addGroup()
   {
     Notify::addNewGroup('Testing Group'); 
+    //accepts new group name
       
   }
  
@@ -551,7 +754,7 @@ class UserController extends  Controller{
 ```
 
 
-### Update a Group
+#### Update a Group
 
 ```php
 
@@ -567,7 +770,7 @@ class UserController extends  Controller{
     Notify::updateGroup('New Group', 3);     
   }
   
-  //the first parameter is the New name, the second parameter is the group id
+  //the first parameter is the New name, the second parameter is the id of the group you want to delete
  
   
 }
@@ -584,7 +787,7 @@ class UserController extends  Controller{
 ```
 
 
-### Delete a Group
+#### Delete a Group
 
 ```php
 
@@ -617,8 +820,8 @@ class UserController extends  Controller{
 ```
 
 
-# Contacts
-### Get all contacts
+# Contact
+#### Get all contacts
 
 ```php
 
@@ -669,7 +872,7 @@ class UserController extends  Controller{
 ```
 
 
-### Get group contacts
+#### Get group contacts
 
 ```php
 
@@ -683,7 +886,7 @@ class UserController extends  Controller{
   
   public function groupContacts()
   {
-    Notify::getAllGroupContacts(1);
+    Notify::getGroupContacts(1);
   }
   
   // accepts group id
@@ -713,7 +916,7 @@ class UserController extends  Controller{
 ```
 
 
-### Get a contact
+#### Get a contact
 
 ```php
 
@@ -755,7 +958,7 @@ class UserController extends  Controller{
 
 
 
-### Add a contact
+#### Add a contact
 
 ```php
 
@@ -793,7 +996,7 @@ class UserController extends  Controller{
 ```
 
 
-### Update a contact
+#### Update a contact
 
 ```php
 
@@ -811,7 +1014,7 @@ class UserController extends  Controller{
 
   }
   
-  // accepts contact id, group id, title, firstname, lastname, email, date of birth
+  // accepts contact id, group id,phone, title, firstname, lastname, email, date of birth
   
 }
  
@@ -828,7 +1031,7 @@ class UserController extends  Controller{
 
 
 
-### Delete a contact
+#### Delete a contact
 
 ```php
 
@@ -863,8 +1066,8 @@ class UserController extends  Controller{
 
 
 
-# Reports
-### Check SMS Balance
+# Reports and Stats
+#### Check SMS Balance
 
 ```php
 
@@ -896,7 +1099,7 @@ class UserController extends  Controller{
 
 ```
 
-### Check Voice Balance
+#### Check Voice Balance
 
 ```php
 
@@ -927,7 +1130,7 @@ class UserController extends  Controller{
 
 ```
 
-### Check SMS Delivery
+#### Check SMS Delivery
 
 ```php
 
@@ -942,6 +1145,7 @@ class UserController extends  Controller{
   public function deliveryStatus()
   {
     Notify::checkSMSDelivery(6071);
+    // accepts sms id
 
   }
   

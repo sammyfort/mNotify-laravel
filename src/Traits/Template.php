@@ -10,13 +10,13 @@ trait Template
     protected static function messageTemplates()
     {
         $response = self::getRequest(self::bindParamsToEndPoint(self::templateURL()));
-        return $response;
+        return json_decode($response);
     }
 
     protected static function singleTemplate(int $id)
     {
         $response = self::getRequest(self::templateURL()."/$id?key=".self::apiKey());
-        return $response;
+        return json_decode($response);
     }
 
     protected static function addMgsTemplate(string $title, $content)
@@ -26,7 +26,7 @@ trait Template
             'content' => $content
         ];
         $response = self::postRequest(self::bindParamsToEndPoint(self::templateURL()), $data);
-        return $response;
+        return json_decode($response);
     }
 
     protected static function putMsgTemplate(int $id, string $title, $content)
@@ -38,13 +38,13 @@ trait Template
         ];
 
         $response = self::putRequest(self::templateURL()."/$id?key=".self::apiKey(), $data);
-        return $response;
+        return json_decode($response);
     }
 
     protected static function deleteMsgTemplate(int $id)
     {
         $response = self::deleteRequest(self::templateURL()."/$id?key=".self::apiKey());
-        return $response;
+        return json_decode($response);
     }
 
 }

@@ -18,7 +18,6 @@ class Notify
     use Request, Commands;
     use   Campaign {
         quickSMS as public sendQuickSMS;
-        fromTemplate as public sendSMSFromTemplate;
         toAuth as public notify;
         quickVoice as public sendQuickVoiceCall;
         groupSMS  as public sendGroupQuickSMS;
@@ -28,7 +27,7 @@ class Notify
 
     use   Template {
         messageTemplates as public getAllMessageTemplates;
-        singleTemplate as public getSingleMessageTemplate;
+        singleTemplate as public getASpecificMessageTemplate;
         addMgsTemplate as public addNewMessageTemplate;
         putMsgTemplate as public updateMessageTemplate;
         deleteMsgTemplate  as public deleteMessageTemplate;
@@ -45,7 +44,7 @@ class Notify
 
     use Contact {
         getAll as public getAllContact;
-        groupContact as public getAllGroupContacts;
+        groupContact as public getGroupContacts;
         specificContact as public getASpecificContact;
         newContact as public addNewContact;
         modify as public updateContact;
