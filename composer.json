@@ -1,6 +1,6 @@
 {
     "name": "velstack/mnotify",
-    "description": "Laravel package for mNotify APIs",
+    "description": "Laravel SMS package for mNotify APIs",
     "type": "library",
     "license": "MIT",
     "autoload": {
