@@ -644,7 +644,7 @@ class UserController extends  Controller{
 ```
 
 
-#Group
+ # Group
 #### Get all Groups 
 
 ```php
