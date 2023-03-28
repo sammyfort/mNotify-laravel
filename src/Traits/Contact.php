@@ -43,10 +43,10 @@ trait Contact
         return  $response;
     }
 
-    protected static function modify(int $id, int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, $dob)
+    protected static function modify(int $contact_id, int $groupId, string $phone, string $title, string $firstname, string $lastname, string $email, $dob)
     {
         $data = [
-            'id' => $id,
+            'id' => $contact_id,
             'group_id' => $groupId,
             'phone' => $phone,
             'title' => $title,
@@ -56,14 +56,14 @@ trait Contact
             'dob' => $dob
         ];
 
-        $response = self::putRequest(self::getContactURL()."/$id?key=".self::apiKey(),$data);
+        $response = self::putRequest(self::getContactURL()."/$contact_id?key=".self::apiKey(),$data);
 
         return json_decode($response);
     }
 
-    protected static function del(int $id, int $groupId)
+    protected static function del(int $contact_id, int $groupId)
     {
-        $response = self::deleteRequest(self::getContactURL()."/$id/$groupId?key=".self::apiKey());
+        $response = self::deleteRequest(self::getContactURL()."/$contact_id/$groupId?key=".self::apiKey());
         return json_decode($response);
     }
 

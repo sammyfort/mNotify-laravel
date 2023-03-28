@@ -19,7 +19,7 @@ trait Report
         return  $response;
     }
 
-    protected static function smsDelivery(int $sms_id)
+    protected static function smsDelivery(string $sms_id)
     {
         $response = self::getRequest(self::bindParamsToEndPoint(self::SMSDeliveryReportURL()."/$sms_id"));
         return json_decode($response);

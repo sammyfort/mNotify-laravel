@@ -45,7 +45,7 @@ return  [
 ];
 
 ```
-If you're using laravel below v7.0 register the service provider in `'/config/app.php'` providers array
+Laravel will automatically discover this package after installation but If you're using laravel below v7.0, you have to manually register the service provider in `'/config/app.php'` providers array
 
 ```php
 'providers' => 
@@ -88,7 +88,9 @@ class UserController extends  Controller{
   
    public function fromDatabase()
    {
-     $users = User::pluck('phone')->toArray();  
+  
+     $users = User::pluck('phone')->toArray(); 
+      // Dont put the recipients in array again. pass it as the first parameter to the sendQuickSMS() method
      Notify::sendQuickSMS($users, 'Good afternoon all users !');
      return 'success';
    }
@@ -222,7 +224,7 @@ class NotificationController extends  Controller{
   {
     $user = User::find(1);
     $user->notify(new WelcomeNotification);
-    return 'Message sent successfully';
+   return 'success';
   }
   
   
@@ -770,7 +772,7 @@ class UserController extends  Controller{
     Notify::updateGroup('New Group', 3);     
   }
   
-  //the first parameter is the New name, the second parameter is the id of the group you want to delete
+  //the first parameter is the New name, the second parameter is the id of the group you want to update
  
   
 }
@@ -976,7 +978,7 @@ class UserController extends  Controller{
 
   }
   
-  // accepts group id, title, firstname, lastname, email, date of birth
+  // accepts group id, title, firstname, lastname, email and date of birth in this format YYYY-MM-DD
   
 }
  
@@ -1014,7 +1016,7 @@ class UserController extends  Controller{
 
   }
   
-  // accepts contact id, group id,phone, title, firstname, lastname, email, date of birth
+  // accepts contact id, group id,phone, title, firstname, lastname, email and date of birth in this format YYYY-MM-DD
   
 }
  
@@ -1144,8 +1146,8 @@ class UserController extends  Controller{
   
   public function deliveryStatus()
   {
-    Notify::checkSMSDelivery(6071);
-    // accepts sms id
+    Notify::checkSMSDelivery("DD808719-2742-478A-85BE-2CF50E455FE8");
+    // remember when an sms is sent, an _id is returned in the response. Use that _id to check the delivery status.
 
   }
   
