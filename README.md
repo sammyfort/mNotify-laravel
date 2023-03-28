@@ -1184,3 +1184,23 @@ class UserController extends  Controller{
 }
 
 ```
+#Support
+
+If you find anything that you think needs to be addressed,
+
+
+Tweet to <br> <a href="https://twitter.com/sammy_fort"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/sammy_fort?label=@sammy_fort&style=social"></a> <br> or send an email to ```sam@velstack.com```
+
+<br><br> 
+
+<p align="center">
+<a href="https://github.com/sammyfort/mNotify-laravel"><img src="https://img.shields.io/badge/%3C%2F%3E-Laravel%20-blue" alt="Build Status"></a>
+<a href="https://packagist.org/packages/velstack/mnotify"><img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/velstack/mnotify?color=41aa5e&label=Installations"></a>
+<a href="https://packagist.org/packages/velstack/mnotify"><img alt="Packagist Version (custom server)" src="https://img.shields.io/packagist/v/velstack/mnotify?label=Version"></a>
+<a href="https://packagist.org/packages/velstack/mnotify"><img src="https://img.shields.io/github/license/sammyfort/mNotify-laravel"></a>
+
+</p>
+  
+<p align="center">
+  Sammy Fort ©2023. Powered by <a href="https://velstack.com/">Velstack</a>
+</p>
