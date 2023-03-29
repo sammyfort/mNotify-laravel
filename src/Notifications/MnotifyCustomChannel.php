@@ -1,0 +1,50 @@
+<?php
+
+
+namespace Velstack\Mnotify\Notifications;
+
+
+use Exception;
+use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
+
+class MnotifyCustomChannel
+{
+    public function send($notifiable, Notification $notification)
+    {
+        if (method_exists($notifiable, 'setMnotifyColumnForSMS'))
+        {
+            $phone = $notifiable->setMnotifyColumnForSMS($notifiable);
+        }
+        elseif ($notifiable instanceof  AnonymousNotifiable)
+        {
+            $phone = $notifiable->routeNotificationFor('mnotify');
+        }
+        else
+        {
+            $phone = $notifiable->phone;
+        }
+
+
+        if (is_null($phone))
+        {
+            return  response()->json('Destination phone is empty', 400);
+        }
+
+        $message = $notification->toCustomMnotify($notifiable);
+
+
+        try
+        {
+            $response = Notify::customSMS($message->sender(), [$phone], $message->content());
+            return  $response;
+        }catch (Exception $exception)
+        {
+            Log::info("response => $exception");
+            throw $exception;
+        }
+    }
+
+
+}

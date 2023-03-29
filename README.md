@@ -158,6 +158,51 @@ class UserController extends  Controller{
 ```
 
 
+#### Send Custom SMS
+
+```php
+
+use App\Http\Controllers\Controller;
+use Velstack\Mnotify\Notifications\Notify;
+
+class UserController extends  Controller{
+
+ 
+ // Sometimes you may need to send sms to users with a different sender ID instead of 
+ // the sender ID registered in mnotify.php, Using the customSMS method, you should pass the sender ID
+ // as the first parameter, followed by array of recipients and then the message
+ // as the
+ 
+  
+  public function customization()
+  {
+  
+    Notify::customSMS('VELSTACK', ['0205550368'], 'API messaging is fun !');
+     return 'success';
+      // accepts   sender id, recipient and message 
+     
+ }
+  
+}
+ 
+```
+
+#### `Response`
+```json
+{
+    "status": "success",
+    "code": "2000",
+    "message": "Sender ID Successfully Registered.",
+    "summary": {
+        "sender_name": "mNotify",
+        "purpose": "For Sending SMS Newsletters",
+        "status": "Pending"
+    }
+}
+
+```
+
+
 ### Using the notification channel
 
 #### In the notification class;

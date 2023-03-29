@@ -27,6 +27,23 @@ trait Campaign
         return json_decode($response);
     }
 
+    protected  static function custom(string $sender_id, string|array $recipients, $message=null)
+    {
+        $def = new MnotifyMessage;
+        if (!is_array($recipients)){
+            $recipients = array($recipients);
+        }
+        $data = [
+            'recipient' => $recipients,
+            'sender' => $sender_id,
+            'message' => $message ?? $def->message($message),
+            'is_schedule' => self::isSchedule(),
+            'schedule_date' => self::isSchedule() ?? null,
+        ];
+        $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
+        return json_decode($response);
+    }
+
 
     protected static function toAuth(string $message)
     {
