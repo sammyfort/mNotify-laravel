@@ -37,7 +37,7 @@ class VelstackChannel
 
         try
         {
-            $response = Notify::customSMS($message->senderId(), [$phone], $message->content());
+            $response = Notify::sendCustomSMS($message->senderId(), [$phone], $message->content());
             return  $response;
         }catch (Exception $exception)
         {
