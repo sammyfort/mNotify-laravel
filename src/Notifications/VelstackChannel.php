@@ -9,7 +9,7 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 
-class MnotifyCustomChannel
+class VelstackChannel
 {
     public function send($notifiable, Notification $notification)
     {
@@ -37,7 +37,7 @@ class MnotifyCustomChannel
 
         try
         {
-            $response = Notify::customSMS($message->sender(), [$phone], $message->content());
+            $response = Notify::customSMS($message->senderId(), [$phone], $message->content());
             return  $response;
         }catch (Exception $exception)
         {

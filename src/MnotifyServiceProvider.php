@@ -4,8 +4,9 @@
  use Velstack\Mnotify\Notifications\MnotifyChannel;
  use Illuminate\Support\Facades\Notification;
  use Illuminate\Support\ServiceProvider;
+ use Velstack\Mnotify\Notifications\VelstackChannel;
 
-class MnotifyServiceProvider extends ServiceProvider
+ class MnotifyServiceProvider extends ServiceProvider
 {
 
     public function register()
@@ -15,7 +16,7 @@ class MnotifyServiceProvider extends ServiceProvider
         });
 
         Notification::extend('velstack', function ($app) {
-            return new MnotifyChannel();
+            return new VelstackChannel();
         });
     }
 

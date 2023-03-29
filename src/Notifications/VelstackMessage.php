@@ -4,7 +4,7 @@
 namespace Velstack\Mnotify\Notifications;
 
 
-class MnotifyCustomMessage
+class VelstackMessage
 {
     private string $message;
     protected string $sender;
@@ -24,5 +24,10 @@ class MnotifyCustomMessage
     {
          $this->sender = $sender;
          return $this;
+    }
+
+    public function senderId(): string
+    {
+        return $this->sender;
     }
 }
