@@ -223,7 +223,7 @@ class NotificationController extends  Controller{
   public function sendNotification()
   {
     $user = User::find(1);
-    $user->notify(new WelcomeNotification);
+    $user->notify(new WelcomeNotification());
    return 'success';
   }
   
