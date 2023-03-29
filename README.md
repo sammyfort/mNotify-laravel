@@ -1186,7 +1186,7 @@ class UserController extends  Controller{
 ```
 
  <p align="center">
- If you find anything that you think needs to addressed, send me a tweet
+ If you find anything that you think needs to be addressed, send me a message on twitter
 </p>
 
 <p align="center">
