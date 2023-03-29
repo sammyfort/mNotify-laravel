@@ -18,7 +18,7 @@ class Notify
     use Request, Commands;
     use   Campaign {
         quickSMS as public sendQuickSMS;
-        custom as public customSMS;
+        custom as public sendCustomSMS;
         toAuth as public notify;
         quickVoice as public sendQuickVoiceCall;
         groupSMS  as public sendGroupQuickSMS;

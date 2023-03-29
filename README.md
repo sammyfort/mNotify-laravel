@@ -178,7 +178,7 @@ class UserController extends  Controller{
   public function customization()
   {
   
-    Notify::customSMS('mNotify', ['0205550368'], 'API messaging is fun !');
+    Notify::sendCustomSMS('mNotify', ['0205550368'], 'API messaging is fun !');
      return 'success';
       // accepts   sender id, recipient and message 
      
