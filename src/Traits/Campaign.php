@@ -5,21 +5,21 @@ namespace Velstack\Mnotify\Traits;
 
 
 use App\Models\User;
-use Velstack\Mnotify\Notifications\MnotifyMessage;
+
 
 
 trait Campaign
 {
-    protected  static function quickSMS(string|array $recipients, $message=null)
+    protected  static function quickSMS(string|array $recipients, $message)
     {
-        $def = new MnotifyMessage;
+
         if (!is_array($recipients)){
             $recipients = array($recipients);
         }
         $data = [
             'recipient' => $recipients,
             'sender' => self::senderId(),
-            'message' => $message ?? $def->message($message),
+            'message' => $message,
             'is_schedule' => self::isSchedule(),
             'schedule_date' => self::isSchedule() ?? null,
         ];
@@ -27,18 +27,16 @@ trait Campaign
         return json_decode($response);
     }
 
-    protected  static function custom(string $sender_id, string|array $recipients, $message=null)
+    protected  static function custom(string $sender_id, string|array $recipients, $message)
     {
-        $def = new MnotifyMessage;
+
         if (!is_array($recipients)){
             $recipients = array($recipients);
         }
         $data = [
             'recipient' => $recipients,
             'sender' => $sender_id,
-            'message' => $message ?? $def->message($message),
-            'is_schedule' => self::isSchedule(),
-            'schedule_date' => self::isSchedule() ?? null,
+            'message' => $message,
         ];
         $response = self::postRequest(self::bindParamsToEndPoint(self::quickSMSURL()),$data);
         return json_decode($response);

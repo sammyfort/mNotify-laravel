@@ -107,15 +107,16 @@ class UserController extends  Controller{
   
   
   
-  /** you can also call the 'notify method'. 
- * This method will send the sms to the authenticated user in your application.
- * So you don't need to pass a recipient. This must only be called on App\Models\User model.
- * NOTE: your model table must contain a 'phone' column. If doesn't, you may set a 'setMnotifyColumnForSMS()'
- * method in your User::class model to return the custom column where you store phone numbers. eg.@after 
- * 
- * public function setMnotifyColumnForSMS(){
-     return $this->getAttributeValue('mnotify_phone_column');
-    }
+  /**
+ you can also call the 'notify method'. 
+ This method will send the sms to the authenticated user in your application.
+ So you don't need to pass a recipient. This must only be called on App\Models\User model.
+ NOTE: your model table must contain a 'phone' column. If doesn't, you may set a 'setMnotifyColumnForSMS()'
+ method in your User::class model to return the custom column where you store phone numbers. eg.@after 
+  public function setMnotifyColumnForSMS()
+ {
+   return $this->getAttributeValue('mnotify_phone_column');
+ }
  **/
  
  public function toAuthUser()
@@ -158,26 +159,26 @@ class UserController extends  Controller{
 ```
 
 
-#### Send Custom SMS
+#### Send Custom SMS With different sender ID
 
 ```php
+
+/** 
+  Sometimes you may need to send sms to users with a different sender ID instead of 
+  the sender ID registered in mnotify.php, Using the customSMS method, you should pass the sender ID
+  as the first parameter, followed by array of recipients and then the message.
+ **/
 
 use App\Http\Controllers\Controller;
 use Velstack\Mnotify\Notifications\Notify;
 
 class UserController extends  Controller{
 
- 
- // Sometimes you may need to send sms to users with a different sender ID instead of 
- // the sender ID registered in mnotify.php, Using the customSMS method, you should pass the sender ID
- // as the first parameter, followed by array of recipients and then the message
- // as the
- 
   
   public function customization()
   {
   
-    Notify::customSMS('VELSTACK', ['0205550368'], 'API messaging is fun !');
+    Notify::customSMS('mNotify', ['0205550368'], 'API messaging is fun !');
      return 'success';
       // accepts   sender id, recipient and message 
      
@@ -189,18 +190,25 @@ class UserController extends  Controller{
 
 #### `Response`
 ```json
-{
+ {
     "status": "success",
     "code": "2000",
-    "message": "Sender ID Successfully Registered.",
+    "message": "messages sent successfully",
     "summary": {
-        "sender_name": "mNotify",
-        "purpose": "For Sending SMS Newsletters",
-        "status": "Pending"
+        "_id": "A59CCB70-662D-45EF-9976-1EFAD249793D",
+        "type": "API QUICK Notify",
+        "total_sent": 2,
+        "contacts": 2,
+        "total_rejected": 0,
+        "numbers_sent": [],
+        "credit_used": 2,
+        "credit_left": 1483
     }
 }
 
 ```
+
+
 
 
 ### Using the notification channel
@@ -251,7 +259,7 @@ class WelcomeNotification extends Notification
  
 ```
 
-#### sending in your controller;
+#### sending notification in your controller;
 
 ```php
 
@@ -325,6 +333,12 @@ class User extends Authenticatable
 #### sending on demand notification;
 
 ```php
+/**
+ Sometimes you may need to send a notification to someone who 
+ is not stored as a "user" of your application. Using the 
+ Notification facade's route method, you may specify 'mnotify' 
+  notification driver followed by the recipient before sending the notification.
+ **/
 
 use App\Http\Controllers\Controller;
 use App\Notifications\WelcomeNotification;
@@ -332,13 +346,6 @@ use Illuminate\Support\Facades\Notification;
  
 
 class NotificationController extends  Controller{
-
- 
-//  Sometimes you may need to send a notification to someone who 
-//  is not stored as a "user" of your application. Using the 
-//  Notification facade's route method, you may specify 'mnotify' 
-//  notification driver followed by the recipient before sending the notification.
-  
   
   public function onDemandNotification()
   { 
@@ -347,6 +354,47 @@ class NotificationController extends  Controller{
   }
   
 }
+ 
+```
+
+#### Send Custom Notification with Different sender ID
+
+```php
+  /**  Sometimes you may need to send notification to users with a different sender ID instead of 
+  the sender ID registered in mnotify.php. WITH this, In the via method of the notification class, specify 'velstack'
+  as the notification driver and then use the "toVelstack" method to send your notification like below.   **/
+ 
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Velstack\Mnotify\Notifications\VelstackMessage;
+
+class SaleAlert extends Notification
+{
+    use Queueable;
+
+
+    public function via($notifiable)
+    {
+        return ['velstack'];
+    }
+
+
+    public function toVelstack($notifiable)
+    {
+        return (new VelstackMessage())
+            ->message('The introduction to the notification.')
+            ->sender('mNotify');
+    }
+
+}
+
+ /**  
+  After doing this in the notification class, 
+  you may now send notification like sending normal notification in laravel   
+ **/
+                                                                                
+
  
 ```
 
