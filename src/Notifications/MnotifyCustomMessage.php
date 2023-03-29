@@ -20,7 +20,7 @@ class MnotifyCustomMessage
         return $this->message;
     }
 
-    public function sender( string $sender): static
+    public function sender(string $sender): static
     {
          $this->sender = $sender;
          return $this;

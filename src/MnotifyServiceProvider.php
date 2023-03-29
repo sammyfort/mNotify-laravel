@@ -13,6 +13,10 @@ class MnotifyServiceProvider extends ServiceProvider
         Notification::extend('mnotify', function ($app) {
             return new MnotifyChannel();
         });
+
+        Notification::extend('velstack', function ($app) {
+            return new MnotifyChannel();
+        });
     }
 
 

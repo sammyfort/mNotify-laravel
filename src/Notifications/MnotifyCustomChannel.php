@@ -19,7 +19,7 @@ class MnotifyCustomChannel
         }
         elseif ($notifiable instanceof  AnonymousNotifiable)
         {
-            $phone = $notifiable->routeNotificationFor('mnotify');
+            $phone = $notifiable->routeNotificationFor('velstack');
         }
         else
         {
@@ -32,7 +32,7 @@ class MnotifyCustomChannel
             return  response()->json('Destination phone is empty', 400);
         }
 
-        $message = $notification->toCustomMnotify($notifiable);
+        $message = $notification->toVelstack($notifiable);
 
 
         try
