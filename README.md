@@ -45,7 +45,7 @@ return  [
 ];
 
 ```
-Laravel will automatically discover this package after installation but If you're using laravel below v7.0, you have to manually register the service provider in `'/config/app.php'` providers array
+Laravel will automatically discover this package after installation but If you're using laravel below v5.5, you have to manually register the service provider in `'/config/app.php'` providers array
 
 ```php
 'providers' => 
