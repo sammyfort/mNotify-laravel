@@ -243,7 +243,8 @@ class WelcomeNotification extends Notification
 
     public function toMnotify($notifiable)
     {
-        return (new MnotifyMessage())->message("Dear $notifiable->firstname, Welcome to laravel !.");
+        return (new MnotifyMessage())
+        ->message("Dear $notifiable->firstname, Welcome to laravel !.");
 
     }
 
